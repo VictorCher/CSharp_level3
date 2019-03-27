@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Рассыльщик" Width="500" Height="200">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Menu x:Name="menu">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Создать"/>
+                    <Separator />
+                    <MenuItem Header="Выход" ></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Помощь"/>
+            </Menu>
+        </DockPanel>
+        <TabControl x:Name="tabControl" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
+            <TabItem Header="Формирование группы рассылки" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Grid Background="#FFE5E5E5">
+                    <WrapPanel Orientation="Vertical">
+                        <ComboBox Width="195" Text="Выбрать отправителя" IsReadOnly="True" IsEditable="True">
+                            <ComboBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Добавить" />
+                                    <MenuItem Header="Редактировать" />
+                                    <MenuItem Header="Удалить" />
+                                </ContextMenu>
+                            </ComboBox.ContextMenu>
+
+                            <TextBlock>LG Nexus 5X</TextBlock>
+                        </ComboBox>
+                        <ComboBox Width="195" Text="Выбрать smtp-сервер" IsReadOnly="True" IsEditable="True"/>
+                        <ComboBox Width="195" Text="Список адресатов" IsReadOnly="True" IsEditable="True">
+                            <TextBlock>LG Nexus 5X</TextBlock>
+                        </ComboBox>
+                    </WrapPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Планировщик" UseLayoutRounding="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Редактор писем">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Статистика">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

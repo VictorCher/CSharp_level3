@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="Рассыльщик" Width="500" Height="200">
+        Title="Рассыльщик" Width="500" Height="210">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -14,7 +14,9 @@
         <DockPanel>
             <Menu x:Name="menu">
                 <MenuItem Header="Файл">
-                    <MenuItem Header="Создать"/>
+                    <MenuItem Header="Письмо">
+                        <MenuItem Header="Отправить" Click="MenuItem_Click"/>
+                    </MenuItem>
                     <Separator />
                     <MenuItem Header="Выход" ></MenuItem>
                 </MenuItem>
@@ -25,7 +27,7 @@
             <TabItem Header="Формирование группы рассылки" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <Grid Background="#FFE5E5E5">
                     <WrapPanel Orientation="Vertical">
-                        <ComboBox Width="195" Text="Выбрать отправителя" IsReadOnly="True" IsEditable="True">
+                        <ComboBox Name="senderBox" Width="285" Text="Выбрать отправителя" IsEditable="True">
                             <ComboBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Добавить" />
@@ -33,13 +35,11 @@
                                     <MenuItem Header="Удалить" />
                                 </ContextMenu>
                             </ComboBox.ContextMenu>
-
-                            <TextBlock>LG Nexus 5X</TextBlock>
                         </ComboBox>
-                        <ComboBox Width="195" Text="Выбрать smtp-сервер" IsReadOnly="True" IsEditable="True"/>
-                        <ComboBox Width="195" Text="Список адресатов" IsReadOnly="True" IsEditable="True">
-                            <TextBlock>LG Nexus 5X</TextBlock>
-                        </ComboBox>
+                        <ComboBox Name="ListServer" Width="285" Text="Выбрать smtp-сервер" IsEditable="True"/>
+                        <ComboBox Name="ListAddress" Width="285" Text="Список адресатов" IsEditable="True"/>
+                        <Label Content="Пароль:" Height="22" Padding="5,0" VerticalContentAlignment="Center" />
+                        <PasswordBox Name="passwordBox" Height="22" VerticalContentAlignment="Center" />
                     </WrapPanel>
                 </Grid>
             </TabItem>

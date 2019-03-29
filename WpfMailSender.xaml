@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="Рассыльщик" Width="500" Height="210">
+        Title="Рассыльщик" Width="500" Height="240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -25,22 +25,38 @@
         </DockPanel>
         <TabControl x:Name="tabControl" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
             <TabItem Header="Формирование группы рассылки" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <Grid Background="#FFE5E5E5">
-                    <WrapPanel Orientation="Vertical">
-                        <ComboBox Name="senderBox" Width="285" Text="Выбрать отправителя" IsEditable="True">
+                <Grid Background="#FFE5E5E5" Margin="0,1,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="0,0,10,0">
+                        <Label Content="Выбор отправителя:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
+                        <ComboBox Name="senderBox" Text="Отправитель не выбран" IsEditable="True" AllowDrop="True">
                             <ComboBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Добавить" />
-                                    <MenuItem Header="Редактировать" />
-                                    <MenuItem Header="Удалить" />
+                                    <MenuItem Header="Добавить" Click="AddSender_Click"/>
+                                    <MenuItem Header="Удалить" Click="DelSender_Click"/>
                                 </ContextMenu>
                             </ComboBox.ContextMenu>
                         </ComboBox>
-                        <ComboBox Name="ListServer" Width="285" Text="Выбрать smtp-сервер" IsEditable="True"/>
-                        <ComboBox Name="ListAddress" Width="285" Text="Список адресатов" IsEditable="True"/>
-                        <Label Content="Пароль:" Height="22" Padding="5,0" VerticalContentAlignment="Center" />
-                        <PasswordBox Name="passwordBox" Height="22" VerticalContentAlignment="Center" />
-                    </WrapPanel>
+                        <Label Content="Выбор smpt-сервера:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
+                        <ComboBox Name="ListServer" Text="Smtp-сервер не выбран" IsEditable="True" AllowDrop="True"/>
+                        <Label Content="Пароль:" Height="22" Padding="9,0" VerticalContentAlignment="Center" />
+                        <PasswordBox Name="passwordBox" Height="22" VerticalContentAlignment="Center" Margin="8,0,80,0" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0,0,0" Grid.Column="1">
+                        <Label Content="Список адресатов:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
+                        <ComboBox x:Name ="ListAddress" Text="Редактирование списка адресатов" HorizontalAlignment="Right" Width="228" Margin="0" VerticalAlignment="Top" IsEditable="True" AllowDrop="True">
+                            <ComboBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Добавить" Click="AddAddress_Click"/>
+                                    <MenuItem Header="Удалить" Click="DelAddress_Click"/>
+                                </ContextMenu>
+                            </ComboBox.ContextMenu>
+                        </ComboBox>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Планировщик" UseLayoutRounding="False">

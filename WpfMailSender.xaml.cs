@@ -22,24 +22,36 @@ namespace MailSender
     /// </summary>
     public partial class WpfMailSender : Window
     {
-        public static string password { get; set; }
-        //EmailSendService mailService;
         public WpfMailSender()
         {
             InitializeComponent();
-            //mailService = new EmailSendService();
             EmailSendService.listStrMails.Add("chernyshov_vv @elektro-shield.ru");
-            EmailSendService.nameServer.Add("mail.elektro-shield.ru");
+            EmailSendService.nameServerNumberPort.Add("mail.elektro-shield.ru",25);
             EmailSendService.listSender.Add("service_s@elektro-shield.ru");
             ListAddress.ItemsSource = EmailSendService.listStrMails;
-            ListServer.ItemsSource = EmailSendService.nameServer;
+            ListServer.ItemsSource = EmailSendService.nameServerNumberPort.Keys;
             senderBox.ItemsSource = EmailSendService.listSender;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-
             EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text);
+        }
+        private void AddAddress_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.listStrMails.Add(ListAddress.Text);
+        }
+        private void DelAddress_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.listStrMails.Remove(ListAddress.Text);
+        }
+        private void AddSender_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.listSender.Add(ListAddress.Text);
+        }
+        private void DelSender_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.listSender.Remove(ListAddress.Text);
         }
     }
 }

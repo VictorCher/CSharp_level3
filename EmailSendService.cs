@@ -13,13 +13,7 @@ namespace MailSender
     {
         public static List<string> listStrMails { get; set; } = new List<string>();
         public static List<string> listSender { get; set; } = new List<string>();
-        public static List<string> nameServer { get; set; } = new List<string>();
-        /*public EmailSendService()
-        {
-            listStrMails = new List<string>{ "email@yandex.ru" }; // Список email'ов //кому мы отправляем письмо
-            //string strPassword = WpfMailSender.password ; // для WinForms - string strPassword = passwordBox.Text;
-            nameServerNumberPort.Add("mail.elektro-shield.ru", 25);
-        }*/
+        public static Dictionary<string,int> nameServerNumberPort { get; set; } = new Dictionary<string,int>();
 
         public static void Send(string strSender, string strPassword, string strServer)
         {
@@ -35,7 +29,9 @@ namespace MailSender
                     // Авторизуемся на smtp-сервере и отправляем письмо
                     // Оператор using гарантирует вызов метода Dispose, даже если при вызове
                     // методов в объекте происходит исключение.
-                    using (SmtpClient sc = new SmtpClient(strServer, 25))
+                    int numberPort;
+                    nameServerNumberPort.TryGetValue(strServer, out numberPort);
+                    using (SmtpClient sc = new SmtpClient(strServer, numberPort))
                     {
                         sc.EnableSsl = true;
                         sc.Credentials = new NetworkCredential(strSender, strPassword);
@@ -48,7 +44,7 @@ namespace MailSender
                             MessageBox.Show("Невозможно отправить письмо " + ex.ToString());
                         }
                     }
-                } //using (MailMessage mm = new MailMessage("sender@yandex.ru", mail))
+                } 
             }
             MessageBox.Show("Работа завершена.");
         }

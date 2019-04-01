@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="Рассыльщик" Width="500" Height="240">
+        Title="Рассыльщик" Width="500" Height="260">
+    <Window.Resources>
+        <local:EmailSendService x:Key="MyCollection"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -15,7 +18,7 @@
             <Menu x:Name="menu">
                 <MenuItem Header="Файл">
                     <MenuItem Header="Письмо">
-                        <MenuItem Header="Отправить" Click="MenuItem_Click"/>
+                        <MenuItem Header="Отправить"/>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Выход" ></MenuItem>
@@ -33,7 +36,7 @@
 
                     <StackPanel Margin="0,0,10,0">
                         <Label Content="Выбор отправителя:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <ComboBox Name="senderBox" Text="Отправитель не выбран" IsEditable="True" AllowDrop="True">
+                        <ComboBox Name="senderBox" Text="Отправитель не выбран" IsEditable="True" AllowDrop="True" ItemsSource="{Binding Source={StaticResource MyCollection},Path=listSender}">
                             <ComboBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Добавить" Click="AddSender_Click"/>
@@ -42,13 +45,13 @@
                             </ComboBox.ContextMenu>
                         </ComboBox>
                         <Label Content="Выбор smpt-сервера:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <ComboBox Name="ListServer" Text="Smtp-сервер не выбран" IsEditable="True" AllowDrop="True"/>
+                        <ComboBox Name="ListServer" Text="Smtp-сервер не выбран" IsEditable="True" AllowDrop="True" ItemsSource="{Binding Source={StaticResource MyCollection},Path=nameServerNumberPort.Keys}"/>
                         <Label Content="Пароль:" Height="22" Padding="9,0" VerticalContentAlignment="Center" />
                         <PasswordBox Name="passwordBox" Height="22" VerticalContentAlignment="Center" Margin="8,0,80,0" />
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" Grid.Column="1">
                         <Label Content="Список адресатов:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <ComboBox x:Name ="ListAddress" Text="Редактирование списка адресатов" HorizontalAlignment="Right" Width="228" Margin="0" VerticalAlignment="Top" IsEditable="True" AllowDrop="True">
+                        <ComboBox x:Name ="ListAddress" Text="Редактирование списка адресатов" HorizontalAlignment="Right" Width="228" Margin="0" VerticalAlignment="Top" IsEditable="True" AllowDrop="True" ItemsSource="{Binding Source={StaticResource MyCollection},Path=listStrMails}">
                             <ComboBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Добавить" Click="AddAddress_Click"/>
@@ -60,14 +63,35 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Планировщик" UseLayoutRounding="False">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Calendar VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left">
+                        <Button x:Name="button" Content="Отправить запланированно"/>
+                        <Button x:Name="sendNow" Content="Отправить сразу" Click="sendNow_Click"/>
+
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Header="Редактор писем">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <RichTextBox x:Name="richTextBox" Height="149" Margin="10" Width="456">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Введите текст сообщения..."/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+
+                </Grid>
             </TabItem>
             <TabItem Header="Статистика">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
+            <Calendar Height="100" Width="100"/>
         </TabControl>
     </Grid>
 </Window>

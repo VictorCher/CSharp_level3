@@ -28,14 +28,10 @@ namespace MailSender
             EmailSendService.listStrMails.Add("chernyshov_vv @elektro-shield.ru");
             EmailSendService.nameServerNumberPort.Add("mail.elektro-shield.ru",25);
             EmailSendService.listSender.Add("service_s@elektro-shield.ru");
-            ListAddress.ItemsSource = EmailSendService.listStrMails;
-            ListServer.ItemsSource = EmailSendService.nameServerNumberPort.Keys;
-            senderBox.ItemsSource = EmailSendService.listSender;
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text);
+            //ListAddress.ItemsSource = EmailSendService.listStrMails;
+            //ListServer.ItemsSource = EmailSendService.nameServerNumberPort.Keys;
+            //senderBox.ItemsSource = EmailSendService.listSender;
+            
         }
         private void AddAddress_Click(object sender, RoutedEventArgs e)
         {
@@ -52,6 +48,11 @@ namespace MailSender
         private void DelSender_Click(object sender, RoutedEventArgs e)
         {
             EmailSendService.listSender.Remove(ListAddress.Text);
+        }
+
+        private void sendNow_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text);
         }
     }
 }

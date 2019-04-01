@@ -45,7 +45,14 @@
                             </ComboBox.ContextMenu>
                         </ComboBox>
                         <Label Content="Выбор smpt-сервера:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <ComboBox Name="ListServer" Text="Smtp-сервер не выбран" IsEditable="True" AllowDrop="True" ItemsSource="{Binding Source={StaticResource MyCollection},Path=nameServerNumberPort.Keys}"/>
+                        <ComboBox Name="ListServer" Text="Smtp-сервер не выбран" IsEditable="True" AllowDrop="True" ItemsSource="{Binding Source={StaticResource MyCollection},Path=nameServerNumberPort.Keys, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Добавить" Click="AddServer_Click"/>
+                                    <MenuItem Header="Удалить" Click="DelSender_Click"/>
+                                </ContextMenu>
+                            </ComboBox.ContextMenu>
+                        </ComboBox>
                         <Label Content="Пароль:" Height="22" Padding="9,0" VerticalContentAlignment="Center" />
                         <PasswordBox Name="passwordBox" Height="22" VerticalContentAlignment="Center" Margin="8,0,80,0" />
                     </StackPanel>
@@ -70,21 +77,25 @@
                     </Grid.ColumnDefinitions>
                     <Calendar VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                     <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left">
-                        <Button x:Name="button" Content="Отправить запланированно"/>
-                        <Button x:Name="sendNow" Content="Отправить сразу" Click="sendNow_Click"/>
+                        <Button x:Name="button" Content="Отправить запланированно" Margin="0,0,0,5"/>
+                        <Button x:Name="sendNow"  Click="sendNow_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Отправить сразу"/>
+                                <Image Source ="images/send_now.png" Width="22" Margin="10,0,0,0"/>
+                            </StackPanel>
+                            
+                        </Button>
+
+
 
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Редактор писем">
                 <Grid Background="#FFE5E5E5">
-                    <RichTextBox x:Name="richTextBox" Height="149" Margin="10" Width="456">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="Введите текст сообщения..."/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <RichTextBox x:Name="richTextBox" Height="149" Margin="10" Width="456"/>
+                    
+
 
                 </Grid>
             </TabItem>

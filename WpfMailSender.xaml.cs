@@ -43,16 +43,26 @@ namespace MailSender
         }
         private void AddSender_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendService.listSender.Add(ListAddress.Text);
+            EmailSendService.listSender.Add(senderBox.Text);
         }
         private void DelSender_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendService.listSender.Remove(ListAddress.Text);
+            EmailSendService.listSender.Remove(senderBox.Text);
+        }
+        private void AddServer_Click(object sender, RoutedEventArgs e)
+        {
+            EmailSendService.nameServerNumberPort.Add( ListServer.Text, 25 );
         }
 
         private void sendNow_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text);
+            string richText = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
+            if (richText == "\r\n")
+            {
+                MessageBox.Show("Письмо не заполнено");
+                return;
+            }
+            EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text, richText);
         }
     }
 }

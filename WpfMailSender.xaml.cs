@@ -1,4 +1,4 @@
-﻿// Чернышов Виктор. Урок 1
+﻿// Чернышов Виктор. Урок 2
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EmailSendServiceDLL;
 
 namespace MailSender
 {
@@ -28,9 +29,6 @@ namespace MailSender
             EmailSendService.listStrMails.Add("chernyshov_vv @elektro-shield.ru");
             EmailSendService.nameServerNumberPort.Add("mail.elektro-shield.ru",25);
             EmailSendService.listSender.Add("service_s@elektro-shield.ru");
-            //ListAddress.ItemsSource = EmailSendService.listStrMails;
-            //ListServer.ItemsSource = EmailSendService.nameServerNumberPort.Keys;
-            //senderBox.ItemsSource = EmailSendService.listSender;
             
         }
         private void AddAddress_Click(object sender, RoutedEventArgs e)
@@ -49,11 +47,7 @@ namespace MailSender
         {
             EmailSendService.listSender.Remove(senderBox.Text);
         }
-        private void AddServer_Click(object sender, RoutedEventArgs e)
-        {
-            EmailSendService.nameServerNumberPort.Add( ListServer.Text, 25 );
-        }
-
+        
         private void sendNow_Click(object sender, RoutedEventArgs e)
         {
             string richText = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
@@ -63,6 +57,11 @@ namespace MailSender
                 return;
             }
             EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text, richText);
+        }
+
+        private void miClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -7,7 +7,8 @@
         xmlns:myDll="clr-namespace:EmailSendServiceDLL;assembly=EmailSendService" 
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="MailSender.WpfMailSender"
         mc:Ignorable="d"
-        Title="Рассыльщик" Width="500" Height="260">
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}" Width="500" Height="260">
     <Window.Resources>
         <myDll:EmailSendService  x:Key="MyCollection"/>
     </Window.Resources>

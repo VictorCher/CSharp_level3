@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender.csproj", "{80670899-7461-4671-AB69-F04BF6E618A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSendServiceDLL", "..\EmailSendService\EmailSendServiceDLL.csproj", "{C15E0172-5331-40A2-88A0-C79C031A466E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSendServiceDLL", "EmailSendService\EmailSendServiceDLL.csproj", "{C15E0172-5331-40A2-88A0-C79C031A466E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

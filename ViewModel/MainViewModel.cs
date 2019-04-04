@@ -1,4 +1,7 @@
 using GalaSoft.MvvmLight;
+using EmailSendServiceDLL;
+using System.Collections.ObjectModel;
+
 
 namespace MailSender.ViewModel
 {
@@ -34,6 +37,23 @@ namespace MailSender.ViewModel
 
         //string _Title = "Рассыльщик почты";
         public string Title { get; set; } = "Рассыльщик почты";
+
+        public string NameRecipient { get; set; }
+
+        public string AddressRecipient {
+            get
+            {
+                Recipient temp = new Recipient() { Name = "", Address = "Адрес не выбран" };
+                foreach (var i in EmailSendService.listStrMails)
+                {
+                    if (i.Name == NameRecipient)
+                    {
+                        temp.Address = i.Address;
+                    }
+                }
+                return temp.Address;
+            }
+            set { AddressRecipient = value; } }
         /*{
             get { return Title; }
             set { _Title = value; }

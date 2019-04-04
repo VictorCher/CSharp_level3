@@ -26,18 +26,19 @@ namespace MailSender
         public WpfMailSender()
         {
             InitializeComponent();
-            EmailSendService.listStrMails.Add("chernyshov_vv @elektro-shield.ru");
+            EmailSendService.listStrMails.Add(new Recipient {Name = "Василий", Address= "chernyshov_vv @elektro-shield.ru" });
+            EmailSendService.listStrMails.Add(new Recipient { Name = "Алексей", Address = "dalinkevich_aa @elektro-shield.ru" });
             EmailSendService.nameServerNumberPort.Add("mail.elektro-shield.ru",25);
             EmailSendService.listSender.Add("service_s@elektro-shield.ru");
             
         }
         private void AddAddress_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendService.listStrMails.Add(ListAddress.Text);
+            EmailSendService.listStrMails.Add(new Recipient {Name = "Noname", Address = ListAddress.Text });
         }
         private void DelAddress_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendService.listStrMails.Remove(ListAddress.Text);
+            EmailSendService.listStrMails.Remove(new Recipient {  Address = ListAddress.Text });
         }
         private void AddSender_Click(object sender, RoutedEventArgs e)
         {

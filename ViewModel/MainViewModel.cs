@@ -38,25 +38,33 @@ namespace MailSender.ViewModel
         //string _Title = "Рассыльщик почты";
         public string Title { get; set; } = "Рассыльщик почты";
 
-        public string NameRecipient { get; set; }
-
-        public string AddressRecipient {
-            get
+        string _NameRecipient;
+        public string NameRecipient
+        {
+            get { return _NameRecipient; }
+            set
             {
-                Recipient temp = new Recipient() { Name = "", Address = "Адрес не выбран" };
+                _NameRecipient = value;
+                Recipient temp = new Recipient() { Name = null, Address = "Адрес не выбран" };
                 foreach (var i in EmailSendService.listStrMails)
                 {
-                    if (i.Name == NameRecipient)
+                    if (i.Name == _NameRecipient)
                     {
                         temp.Address = i.Address;
                     }
                 }
-                return temp.Address;
+                AddressRecipient = temp.Address;
             }
-            set { AddressRecipient = value; } }
-        /*{
-            get { return Title; }
-            set { _Title = value; }
-        }*/
+        }
+        string _AddressRecipient;
+        public string AddressRecipient
+        {
+            get { return _AddressRecipient; }
+            set
+            {
+                _AddressRecipient = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

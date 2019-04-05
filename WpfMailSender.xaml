@@ -53,7 +53,7 @@
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" Grid.Column="1">
                         <Label Content="Список адресатов:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <ComboBox x:Name ="ListAddress" Text="{Binding AddressRecipient}" HorizontalAlignment="Right" Width="228" Margin="0" VerticalAlignment="Top" IsEditable="True" AllowDrop="True" ItemsSource="{Binding listStrMails, Source={StaticResource MyCollection}}">
+                        <ComboBox x:Name ="ListAddress"  HorizontalAlignment="Right" Width="228" Margin="0" VerticalAlignment="Top" IsEditable="True" AllowDrop="True" Text ="{Binding AddressRecipient}" ItemsSource="{Binding listStrMails, Source={StaticResource MyCollection}}" DisplayMemberPath="Address">
                             <ComboBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Добавить" Click="AddAddress_Click"/>
@@ -62,7 +62,7 @@
                             </ComboBox.ContextMenu>
                         </ComboBox>
                         <Label Content="Поиск адресатов по имени:" Padding="9,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="22" />
-                        <TextBox Height="22" Text="{Binding NameRecipient, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Height="22" Text="{Binding NameRecipient, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,20,0"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

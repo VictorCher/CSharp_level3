@@ -52,9 +52,21 @@ namespace MailSender
         private void sendNow_Click(object sender, RoutedEventArgs e)
         {
             string richText = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
-            if (richText == "\r\n")
+            // Валидация введенных в поля значений
+            try
             {
-                MessageBox.Show("Письмо не заполнено");
+                if(senderBox.Text == null || senderBox.Text == "Отправитель не выбран")
+                    throw new Exception("Отправитель не выбран");
+                if (ListAddress.Text == null)
+                    throw new Exception("Список адресатов пуст");
+                if (ListServer.Text == null || ListServer.Text == "Smtp-сервер не выбран")
+                    throw new Exception("Smtp-сервер не выбран");
+                if (richText == "\r\n")
+                    throw new Exception("Письмо не заполнено");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
                 return;
             }
             EmailSendService.Send(senderBox.Text, passwordBox.Password, ListServer.Text, richText);

@@ -35,7 +35,6 @@ namespace MailSender.ViewModel
             ////}
         }
 
-        //string _Title = "Рассыльщик почты";
         public string Title { get; set; } = "Рассыльщик почты";
 
         string _NameRecipient;

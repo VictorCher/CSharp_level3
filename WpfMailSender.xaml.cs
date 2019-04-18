@@ -1,4 +1,4 @@
-﻿// Чернышов Виктор. Урок 3
+﻿// Чернышов Виктор. Урок 7
 
 using System;
 using System.Collections.Generic;

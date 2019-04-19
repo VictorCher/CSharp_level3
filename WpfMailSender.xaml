@@ -90,8 +90,10 @@
                     <RichTextBox x:Name="richTextBox" Height="149" Margin="10" Width="456"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Статистика">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header = "Отчеты">
+                <WindowsFormsHost>
+                    
+                </WindowsFormsHost>
             </TabItem>
         </TabControl>
     </Grid>

@@ -12,7 +12,17 @@ namespace MailSender
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
+    public partial class Human
+    {
+        public int HumanId { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Server { get; set; }
+        public int Port { get; set; }
+        public bool SSL { get; set; }
+    }
+
     public partial class DatabaseContainer : DbContext
     {
         public DatabaseContainer()

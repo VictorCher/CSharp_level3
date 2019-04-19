@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EmailSendServiceDLL;
 
+
 namespace MailSender
 {
     /// <summary>
@@ -23,6 +24,8 @@ namespace MailSender
     /// </summary>
     public partial class WpfMailSender : Window
     {
+        
+        
         public WpfMailSender()
         {
             InitializeComponent();
@@ -32,6 +35,7 @@ namespace MailSender
             EmailSendService.listSender.Add("service_s@elektro-shield.ru");
             
         }
+        
         private void AddAddress_Click(object sender, RoutedEventArgs e)
         {
             EmailSendService.listStrMails.Add(new Recipient {Name = "Noname", Address = ListAddress.Text });
